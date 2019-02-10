@@ -9,7 +9,7 @@
 				<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 			</div>
 			<div class="custom-file">
-				<input type="file" class="custom-file-input" name='avatar' id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+				<input type="file" class="custom-file-input" name='avatar' id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required="">
 				<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 			</div>
 			<input type="submit" value="Upload" class="btn btn-success ml-3">
@@ -30,11 +30,15 @@
 						@method('put')
 						<input type="hidden" name="selectForm" value="{{$avatar->id}}" >
 					</form>
-					<a href=""><i class="text-danger fa fa-minus-circle fa-2x"></i></a>
+					<a href=""><i class="text-danger fa fa-eye fa-2x"></i></a>
 				</div>
 				<div class="float-right">
-					<a href=""><i class="text-success fa fa-eye fa-2x"></i></a>
-					<a href=""><i class="text-warning fa fa-download fa-2x"></i></a>
+					<a href=""><i class="text-success fa fa-download fa-2x"></i></a>
+					<a href="" onclick="event.preventDefault();document.getElementById('deleteForm{{$avatar->id}}').submit()"><i class="text-warning fa fa-minus-circle fa-2x"></i></a>
+					<form action="{{route('avatar.destroy',$avatar->id)}}" style="display: none;" id="deleteForm{{$avatar->id}}" method="post">
+						@csrf 
+						@method('delete')
+					</form>
 				</div>
 			</div>
 		</div>	

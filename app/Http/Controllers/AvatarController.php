@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Models\Media;
 
 class AvatarController extends Controller
 {
@@ -89,6 +90,12 @@ class AvatarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // return $id;
+        $user =  auth()->user();
+        $user->avatar_id = null;
+        $user->save();
+        $media = Media::find($id);
+        $media->delete();
+        return back();
     }
 }
