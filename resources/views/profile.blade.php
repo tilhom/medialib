@@ -16,15 +16,26 @@
 		</div>
 	</form>
 	@if(session()->has('error'))
-		<div class="alert alert-danger">{{session()->get('error')}}</div>
+	<div class="alert alert-danger">{{session()->get('error')}}</div>
 	@endif
 	<div class="card-columns">
 		@foreach($avatars as $avatar)
 		<div class="card">
 			<img src="{{$avatar->getUrl('card')}}" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title that wraps to a new line</h5>
-				<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			<div class="card-body pb-5">
+				<div class="float-left">
+					<a href="" onclick="event.preventDefault();document.getElementById('selectForm{{$avatar->id}}').submit()"><i class="text-primary fa fa-check fa-2x"></i></a>
+					<form action="{{route('avatar.update',auth()->id())}}" style="display: none;" id="selectForm{{$avatar->id}}" method="post">
+						@csrf 
+						@method('put')
+						<input type="hidden" name="selectForm" value="{{$avatar->id}}" >
+					</form>
+					<a href=""><i class="text-danger fa fa-minus-circle fa-2x"></i></a>
+				</div>
+				<div class="float-right">
+					<a href=""><i class="text-success fa fa-eye fa-2x"></i></a>
+					<a href=""><i class="text-warning fa fa-download fa-2x"></i></a>
+				</div>
 			</div>
 		</div>	
 		@endforeach

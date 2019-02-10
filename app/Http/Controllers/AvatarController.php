@@ -75,7 +75,10 @@ class AvatarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+        $user->avatar_id = $request->get('selectForm');
+        $user->save();
+        return back();
     }
 
     /**
