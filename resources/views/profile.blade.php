@@ -30,11 +30,11 @@
 						@method('put')
 						<input type="hidden" name="selectForm" value="{{$avatar->id}}" >
 					</form>
-					<a href=""><i class="text-danger fa fa-eye fa-2x"></i></a>
+					<a href="{{$avatar->getUrl()}}" target="_blank"><i class="text-secondary fa fa-eye fa-2x"></i></a>
 				</div>
 				<div class="float-right">
-					<a href=""><i class="text-success fa fa-download fa-2x"></i></a>
-					<a href="" onclick="event.preventDefault();document.getElementById('deleteForm{{$avatar->id}}').submit()"><i class="text-warning fa fa-minus-circle fa-2x"></i></a>
+					<a href="{{route('download',$avatar->id)}}" target="_blank"><i class="text-success fa fa-download fa-2x"></i></a>
+					<a href="" onclick="event.preventDefault();document.getElementById('deleteForm{{$avatar->id}}').submit()"><i class="text-danger fa fa-minus-circle fa-2x"></i></a>
 					<form action="{{route('avatar.destroy',$avatar->id)}}" style="display: none;" id="deleteForm{{$avatar->id}}" method="post">
 						@csrf 
 						@method('delete')

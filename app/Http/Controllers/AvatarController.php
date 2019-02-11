@@ -98,4 +98,8 @@ class AvatarController extends Controller
         $media->delete();
         return back();
     }
+    public function download(Media $media)
+    {
+        return response()->download($media->getPath(), $media->name);
+    }
 }
